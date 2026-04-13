@@ -51,10 +51,12 @@ export function getAllTags(): string[] {
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   const filePath = path.join(POSTS_DIR, `${slug}.md`);
-  if (!fs.existsSync(filePath)) {
+  try {
+    await fs.promises.access(filePath);
+  } catch {
     throw new Error(`Post not found: "${slug}" (expected at ${filePath})`);
   }
-  const fileContent = fs.readFileSync(filePath, "utf8");
+  const fileContent = await fs.promises.readFile(filePath, "utf8");
   const { data, content } = matter(fileContent);
   const { contentHtml, toc } = await markdownToHtml(content);
 
