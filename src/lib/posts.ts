@@ -13,7 +13,9 @@ function getSlugFromFilename(filename: string): string {
 function parseFrontmatter(data: Record<string, unknown>): PostFrontmatter {
   return {
     title: typeof data.title === "string" ? data.title : "",
-    date: typeof data.date === "string" ? data.date : "",
+    date: data.date instanceof Date
+      ? data.date.toISOString().split("T")[0]
+      : typeof data.date === "string" ? data.date : "",
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     description: typeof data.description === "string" ? data.description : undefined,
   };
