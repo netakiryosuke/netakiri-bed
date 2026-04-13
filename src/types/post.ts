@@ -7,5 +7,5 @@ export interface PostFrontmatter {
 
 export interface Post extends PostFrontmatter {
   slug: string;
-  content: string;
+  contentHtml: string;
 }
