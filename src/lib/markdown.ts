@@ -4,7 +4,8 @@ import remarkRehype from "remark-rehype";
 import rehypeSlug from "rehype-slug";
 import rehypeShiki from "@shikijs/rehype";
 import rehypeStringify from "rehype-stringify";
-import type { Root } from "hast";
+import { toString } from "hast-util-to-string";
+import type { Root, Element } from "hast";
 import type { Plugin } from "unified";
 import type { TocItem } from "@/types/post";
 
@@ -22,10 +23,7 @@ function rehypeExtractToc(toc: TocItem[]): Plugin<[], Root> {
 
       const level = parseInt(match[1], 10);
       const id = typeof node.properties?.id === "string" ? node.properties.id : "";
-      const text = node.children
-        .filter((c) => c.type === "text")
-        .map((c) => ("value" in c ? c.value : ""))
-        .join("");
+      const text = toString(node as Element);
 
       if (id && text) {
         toc.push({ id, text, level });
