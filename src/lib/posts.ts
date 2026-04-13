@@ -37,7 +37,7 @@ export function getAllPosts(): PostSummary[] {
       const { data } = matter(fs.readFileSync(filePath, "utf8"));
       return { slug, ...parseFrontmatter(data) };
     })
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export function getPostsByTag(tag: string): PostSummary[] {
