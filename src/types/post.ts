@@ -16,3 +16,5 @@ export interface Post extends PostFrontmatter {
   contentHtml: string;
   toc: TocItem[];
 }
+
+export type PostSummary = Omit<Post, "contentHtml" | "toc">;
