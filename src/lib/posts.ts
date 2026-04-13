@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { markdownToHtml } from "@/lib/markdown";
-import type { Post, PostFrontmatter } from "@/types/post";
+import type { Post, PostFrontmatter, PostSummary } from "@/types/post";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
 
@@ -29,7 +29,7 @@ export function getAllPostSlugs(): string[] {
     .map(getSlugFromFilename);
 }
 
-export function getAllPosts(): Omit<Post, "contentHtml" | "toc">[] {
+export function getAllPosts(): PostSummary[] {
   const slugs = getAllPostSlugs();
   return slugs
     .map((slug) => {
@@ -40,7 +40,7 @@ export function getAllPosts(): Omit<Post, "contentHtml" | "toc">[] {
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getPostsByTag(tag: string): Omit<Post, "contentHtml" | "toc">[] {
+export function getPostsByTag(tag: string): PostSummary[] {
   return getAllPosts().filter((post) => post.tags.includes(tag));
 }
 
