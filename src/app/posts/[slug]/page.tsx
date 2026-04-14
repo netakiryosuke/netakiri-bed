@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import Toc from "@/components/Toc";
@@ -11,15 +12,20 @@ export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug).catch(() => null);
+  if (!post) return {};
+  return {
+    title: post.title,
+    description: post.description,
+  };
+}
+
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-
-  let post;
-  try {
-    post = await getPostBySlug(slug);
-  } catch {
-    notFound();
-  }
+  const post = await getPostBySlug(slug).catch(() => null);
+  if (!post) notFound();
 
   return (
     <main>
