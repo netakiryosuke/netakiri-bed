@@ -17,7 +17,7 @@ export default function PostCard({ post }: Props) {
         <ul>
           {post.tags.map((tag) => (
             <li key={tag}>
-              <Link href={`/tags/${tag}`}>{tag}</Link>
+              <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
             </li>
           ))}
         </ul>
