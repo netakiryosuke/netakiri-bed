@@ -62,7 +62,7 @@ export function getAllTags(): string[] {
   return [...new Set(tags)].sort();
 }
 
-export async function getPostBySlug(slug: string): Promise<Post> {
+export const getPostBySlug = cache(async (slug: string): Promise<Post> => {
   const filePath = path.join(POSTS_DIR, `${slug}.md`);
   try {
     await fs.promises.access(filePath);
@@ -79,4 +79,4 @@ export async function getPostBySlug(slug: string): Promise<Post> {
     contentHtml,
     toc,
   };
-}
+});
