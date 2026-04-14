@@ -7,23 +7,22 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return getAllTags().map((tag) => ({ tag: encodeURIComponent(tag) }));
+  // Next.js が内部で encodeURIComponent を適用するため、生の値を返す
+  return getAllTags().map((tag) => ({ tag }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
-  const decoded = decodeURIComponent(tag);
-  return { title: `タグ: ${decoded}` };
+  return { title: `タグ: ${tag}` };
 }
 
 export default async function TagPage({ params }: Props) {
   const { tag } = await params;
-  const decoded = decodeURIComponent(tag);
-  const posts = getPostsByTag(decoded);
+  const posts = getPostsByTag(tag);
 
   return (
     <main>
-      <h1>{decoded}</h1>
+      <h1>{tag}</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.slug}>
