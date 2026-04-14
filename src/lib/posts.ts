@@ -10,12 +10,24 @@ function getSlugFromFilename(filename: string): string {
   return filename.replace(/\.md$/, "");
 }
 
-function parseFrontmatter(data: Record<string, unknown>): PostFrontmatter {
-  return {
-    title: typeof data.title === "string" ? data.title : "",
-    date: data.date instanceof Date
+function parseFrontmatter(data: Record<string, unknown>, slug: string): PostFrontmatter {
+  if (typeof data.title !== "string" || !data.title) {
+    throw new Error(`Missing required frontmatter field "title" in post "${slug}"`);
+  }
+
+  const date =
+    data.date instanceof Date
       ? data.date.toISOString().split("T")[0]
-      : typeof data.date === "string" ? data.date : "",
+      : typeof data.date === "string"
+        ? data.date
+        : null;
+  if (!date) {
+    throw new Error(`Missing required frontmatter field "date" in post "${slug}"`);
+  }
+
+  return {
+    title: data.title,
+    date,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     description: typeof data.description === "string" ? data.description : undefined,
   };
@@ -35,7 +47,7 @@ export function getAllPosts(): PostSummary[] {
     .map((slug) => {
       const filePath = path.join(POSTS_DIR, `${slug}.md`);
       const { data } = matter(fs.readFileSync(filePath, "utf8"));
-      return { slug, ...parseFrontmatter(data) };
+      return { slug, ...parseFrontmatter(data, slug) };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -62,7 +74,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
   return {
     slug,
-    ...parseFrontmatter(data),
+    ...parseFrontmatter(data, slug),
     contentHtml,
     toc,
   };
