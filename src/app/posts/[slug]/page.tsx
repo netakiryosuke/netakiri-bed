@@ -14,6 +14,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  // TODO(#issue): frontmatter不備やMarkdown変換エラーも握りつぶすため、NotFound専用エラー型の導入を検討
   const post = await getPostBySlug(slug).catch(() => null);
   if (!post) return {};
   return {
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
+  // TODO(#issue): frontmatter不備やMarkdown変換エラーも握りつぶすため、NotFound専用エラー型の導入を検討
   const post = await getPostBySlug(slug).catch(() => null);
   if (!post) notFound();
 
