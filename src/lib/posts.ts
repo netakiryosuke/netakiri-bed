@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 import matter from "gray-matter";
 import { markdownToHtml } from "@/lib/markdown";
 import type { Post, PostFrontmatter, PostSummary } from "@/types/post";
@@ -41,7 +42,7 @@ export function getAllPostSlugs(): string[] {
     .map(getSlugFromFilename);
 }
 
-export function getAllPosts(): PostSummary[] {
+export const getAllPosts = cache((): PostSummary[] => {
   const slugs = getAllPostSlugs();
   return slugs
     .map((slug) => {
@@ -50,7 +51,7 @@ export function getAllPosts(): PostSummary[] {
       return { slug, ...parseFrontmatter(data, slug) };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
-}
+});
 
 export function getPostsByTag(tag: string): PostSummary[] {
   return getAllPosts().filter((post) => post.tags.includes(tag));
