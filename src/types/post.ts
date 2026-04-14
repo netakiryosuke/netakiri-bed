@@ -1,3 +1,9 @@
+export interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
 export interface PostFrontmatter {
   title: string;
   date: string;
@@ -8,4 +14,7 @@ export interface PostFrontmatter {
 export interface Post extends PostFrontmatter {
   slug: string;
   contentHtml: string;
+  toc: TocItem[];
 }
+
+export type PostSummary = Omit<Post, "contentHtml" | "toc">;
