@@ -1,8 +1,9 @@
 import Link from "next/link";
+import styles from "./Header.module.css";
 
 export default function Header() {
     return (
-        <header className="flex justify-between items-center px-6 py-6">
+        <header className={styles.header}>
             <Link href="/" className="text-lg text-white">Netakiri Blog</Link>
             <nav aria-label="Primary">
                 <ul className="flex flex-row gap-4">
