@@ -33,20 +33,20 @@ export default async function PostPage({ params }: Props) {
     <main>
       <article>
         <header>
-          <h1>{post.title}</h1>
-          <time dateTime={post.date}>{post.date}</time>
+          <h1 className="text-white">{post.title}</h1>
+          <time dateTime={post.date} className="text-white">{post.date}</time>
           {post.tags.length > 0 && (
             <ul>
               {post.tags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
+                  <Link href={`/tags/${encodeURIComponent(tag)}`} className="text-white">{tag}</Link>
                 </li>
               ))}
             </ul>
           )}
         </header>
         <Toc items={post.toc} />
-        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="text-white" />
       </article>
     </main>
   );
