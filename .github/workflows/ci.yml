@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "src/**"
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - "src/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        id: lint
+        run: |
+          npm run lint > lint-result.txt 2>&1
+
+      - name: Comment lint result to PR
+        if: github.event_name == 'pull_request' && steps.lint.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            
+            let lintResult = '';
+            if (fs.existsSync('lint-result.txt')) {
+              lintResult = fs.readFileSync('lint-result.txt', 'utf8').trim();
+            }
+
+            const body = [
+              '### ESLint Results',
+              '',
+              '<details>',
+              '<summary>詳細を表示</summary>',
+              '',
+              '```',
+              lintResult,
+              '```',
+              '',
+              '</details>',
+            ].join('\n');
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const marker = '### ESLint Results';
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body,
+            });
+
+      - name: Build
+        run: npm run build
