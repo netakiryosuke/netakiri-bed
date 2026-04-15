@@ -7,17 +7,17 @@ interface Props {
 
 export default function PostCard({ post }: Props) {
   return (
-    <article>
+    <article className="text-white">
       <h2>
-        <Link href={`/posts/${post.slug}`} className="text-white">{post.title}</Link>
+        <Link href={`/posts/${post.slug}`}>{post.title}</Link>
       </h2>
-      <time dateTime={post.date} className="text-white">{post.date}</time>
-      {post.description && <p className="text-white">{post.description}</p>}
+      <time dateTime={post.date}>{post.date}</time>
+      {post.description && <p>{post.description}</p>}
       {post.tags.length > 0 && (
         <ul>
           {post.tags.map((tag) => (
             <li key={tag}>
-              <Link href={`/tags/${encodeURIComponent(tag)}`} className="text-white">{tag}</Link>
+              <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
             </li>
           ))}
         </ul>
