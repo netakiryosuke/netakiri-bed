@@ -6,7 +6,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>記事一覧</h1>
+      <h1 className="text-white">記事一覧</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.slug}>
