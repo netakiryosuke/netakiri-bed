@@ -5,17 +5,15 @@ export default function Home() {
   const posts = getAllPosts();
 
   return (
-    <>
-      <main>
-        <h1>記事一覧</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <PostCard post={post} />
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+    <main>
+      <h1>記事一覧</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <PostCard post={post} />
+          </li>
+        ))}
+      </ul>
+    </main>
   );
 }
