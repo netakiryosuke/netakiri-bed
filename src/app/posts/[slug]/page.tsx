@@ -45,8 +45,12 @@ export default async function PostPage({ params }: Props) {
             </ul>
           )}
         </header>
-        <Toc items={post.toc} />
-        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="text-white" />
+        <div className="flex gap-8">
+          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="text-white" />
+          <aside className="sticky top-24 self-start">
+            <Toc items={post.toc} />
+          </aside>
+        </div>
       </article>
     </main>
   );
