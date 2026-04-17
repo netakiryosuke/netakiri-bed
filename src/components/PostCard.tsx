@@ -19,9 +19,7 @@ export default function PostCard({ post }: Props) {
         hover:bg-white/15
         transition
       ">
-        <h2>
-          <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-        </h2>
+        <h2>{post.title}</h2>
         <time dateTime={post.date}>{post.date}</time>
         {post.description && <p>{post.description}</p>}
         {post.tags.length > 0 && (
@@ -32,6 +30,6 @@ export default function PostCard({ post }: Props) {
           </ul>
         )}
       </article>
-    </Link >
+    </Link>
   );
 }
