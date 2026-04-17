@@ -37,7 +37,7 @@ function TocList({ items }: { items: NestedTocItem[] }) {
     <ol>
       {items.map((item) => (
         <li key={item.id}>
-          <Link href={`#${item.id}`} className="text-white">{item.text}</Link>
+          <Link href={`#${item.id}`}>{item.text}</Link>
           {item.children.length > 0 && <TocList items={item.children} />}
         </li>
       ))}
