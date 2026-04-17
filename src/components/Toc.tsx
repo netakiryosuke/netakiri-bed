@@ -36,7 +36,7 @@ function TocList({ items }: { items: NestedTocItem[] }) {
   return (
     <ol>
       {items.map((item) => (
-        <li key={item.id}>
+        <li key={item.id} className="mb-2">
           <Link href={`#${item.id}`}>{item.text}</Link>
           {item.children.length > 0 && <TocList items={item.children} />}
         </li>
@@ -51,7 +51,8 @@ export default function Toc({ items }: Props) {
   const nested = buildNestedItems(items);
 
   return (
-    <nav aria-label="目次">
+    <nav aria-label="目次" className="p-4">
+      <h3>目次</h3>
       <TocList items={nested} />
     </nav>
   );
