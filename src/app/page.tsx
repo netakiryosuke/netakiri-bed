@@ -12,6 +12,7 @@ export default function Home() {
       </section>
 
       <section className="relative z-10 mt-[100vh] bg-zinc-900 min-h-screen">
+        <h1 className="text-white">記事一覧</h1>
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {posts.map((post) => (
             <li key={post.slug}>
