@@ -23,3 +23,29 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold tracking-tight mb-6;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold tracking-tight mb-4;
+  }
+
+  h3 {
+    @apply text-xl font-medium mb-3;
+  }
+
+  p {
+    @apply leading-8 mb-4;
+  }
+
+  a {
+    @apply transition-opacity hover:opacity-80;
+  }
+
+  time {
+    @apply text-sm text-gray-400;
+  }
+}
