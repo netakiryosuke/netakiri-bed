@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main>
       <h1 className="text-white">記事一覧</h1>
-      <ul>
+      <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         {posts.map((post) => (
           <li key={post.slug}>
             <PostCard post={post} />
