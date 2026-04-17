@@ -23,6 +23,11 @@ main {
   padding-top: 50px;
 }
 
+html {
+  /* 固定ヘッダーの高さ分だけアンカージャンプ先をずらす */
+  scroll-padding-top: 80px;
+}
+
 body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
