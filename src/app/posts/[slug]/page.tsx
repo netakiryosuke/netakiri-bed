@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import Toc from "@/components/Toc";
 import Link from "next/link";
+import styles from "./content.module.css";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -46,7 +47,7 @@ export default async function PostPage({ params }: Props) {
           )}
         </header>
         <div className="flex gap-8 py-10">
-          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="border border-transparent rounded bg-zinc-700/70" />
+          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className={`border border-transparent rounded bg-zinc-700/70 ${styles.content}`} />
           <aside className="sticky top-24 self-start border border-transparent rounded text-black bg-white/50">
             <Toc items={post.toc}/>
           </aside>
