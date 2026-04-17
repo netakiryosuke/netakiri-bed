@@ -31,22 +31,26 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <main>
-      <article>
-        <header>
-          <h1 className="text-white">{post.title}</h1>
-          <time dateTime={post.date} className="text-white">{post.date}</time>
+      <article className="text-white p-10">
+        <header className="border border-transparent rounded bg-zinc-700/70">
+          <h1>{post.title}</h1>
+          <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
             <ul>
               {post.tags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/tags/${encodeURIComponent(tag)}`} className="text-white">{tag}</Link>
+                  <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
                 </li>
               ))}
             </ul>
           )}
         </header>
-        <Toc items={post.toc} />
-        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="text-white" />
+        <div className="flex gap-8 py-10">
+          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className="border border-transparent rounded bg-zinc-700/70" />
+          <aside className="sticky top-24 self-start border border-transparent rounded text-black bg-white/50">
+            <Toc items={post.toc}/>
+          </aside>
+        </div>
       </article>
     </main>
   );
