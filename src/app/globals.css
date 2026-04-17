@@ -24,7 +24,6 @@ main {
 }
 
 html {
-  /* 固定ヘッダーの高さ分だけアンカージャンプ先をずらす */
   scroll-padding-top: 80px;
 }
 
