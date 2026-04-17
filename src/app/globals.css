@@ -42,7 +42,7 @@ body {
   }
 
   a {
-    @apply transition-colors hover:opacity-80;
+    @apply transition-opacity hover:opacity-80;
   }
 
   time {
