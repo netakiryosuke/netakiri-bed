@@ -7,7 +7,17 @@ interface Props {
 
 export default function PostCard({ post }: Props) {
   return (
-    <article className="text-white">
+    <article className="
+      text-white
+      rounded-2xl
+      bg-white/5
+      backdrop-blur-md  
+      border border-white/10
+      p-6
+      shadow-lg
+      hover:bg-white/15
+      transition
+    ">
       <h2>
         <Link href={`/posts/${post.slug}`}>{post.title}</Link>
       </h2>
