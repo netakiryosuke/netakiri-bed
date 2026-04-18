@@ -4,6 +4,7 @@ import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import Toc from "@/components/Toc";
 import Link from "next/link";
 import styles from "./content.module.css";
+import Tag from "@/components/Tag";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -40,7 +41,7 @@ export default async function PostPage({ params }: Props) {
             <ul>
               {post.tags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
+                  <Tag tagName={tag} />
                 </li>
               ))}
             </ul>
