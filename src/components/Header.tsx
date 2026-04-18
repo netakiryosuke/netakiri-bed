@@ -10,7 +10,7 @@ export default function Header() {
     <header className={styles.header}>
       <Link href="/" className="flex gap-2">
         <span className="font-jp text-xl">寝たきり</span>
-        <span className="opacity-50">|</span>
+        <span aria-hidden="true" className="opacity-50">|</span>
         <span className="font-en text-xl tracking-wide">
           Late Night
         </span>

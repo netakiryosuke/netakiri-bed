@@ -9,7 +9,7 @@ export default function Home() {
       <section className="fixed inset-0 flex flex-col items-center justify-center z-0">
         <h1 className="flex gap-2 text-white text-4xl font-normal tracking-normal items-baseline">
           <span className="font-jp text-3xl">寝たきり</span>
-          <span className="opacity-50">|</span>
+          <span aria-hidden="true" className="opacity-50">|</span>
           <span className="font-en tracking-wide">
             Late Night
           </span>
