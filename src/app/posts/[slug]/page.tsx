@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import Toc from "@/components/Toc";
-import Link from "next/link";
 import styles from "./content.module.css";
 import Tag from "@/components/Tag";
 
