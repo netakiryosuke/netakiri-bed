@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <span>netakiri-bed</span>
       <span>Written from my bed.</span>
-      <span>© 2026</span>
+      <span>© 2026 Your Name</span>
     </footer>
   );
 }
