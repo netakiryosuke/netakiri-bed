@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   tags: string[];
@@ -10,7 +10,6 @@ interface Props {
 export default function TagsDropdown({ tags }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
   const filtered = tags.filter((tag) =>
@@ -28,17 +27,12 @@ export default function TagsDropdown({ tags }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSelect = (tag: string) => {
-    router.push(`/tags/${encodeURIComponent(tag)}`);
-    setOpen(false);
-    setQuery("");
-  };
-
   return (
     <div ref={ref} className="relative">
       <button
+        type="button"
         onClick={() => setOpen((prev) => !prev)}
-        aria-haspopup="listbox"
+        aria-haspopup="menu"
         aria-expanded={open}
         className="cursor-pointer hover:text-white/80"
       >
@@ -57,16 +51,17 @@ export default function TagsDropdown({ tags }: Props) {
               className="w-full rounded px-2 py-1 text-sm bg-white/10 text-white placeholder-white/40 outline-none border border-white/20 focus:border-white/50"
             />
           </div>
-          <ul role="listbox" className="max-h-60 overflow-y-auto pb-2">
+          <ul role="menu" className="max-h-60 overflow-y-auto pb-2">
             {filtered.length > 0 ? (
               filtered.map((tag) => (
-                <li key={tag} role="option" aria-selected={false}>
-                  <button
-                    onClick={() => handleSelect(tag)}
-                    className="w-full text-left px-4 py-1.5 text-sm text-white hover:bg-white/10 cursor-pointer transition"
+                <li key={tag} role="menuitem">
+                  <Link
+                    href={`/tags/${encodeURIComponent(tag)}`}
+                    onClick={() => { setOpen(false); setQuery(""); }}
+                    className="block w-full px-4 py-1.5 text-sm text-white hover:bg-white/10 transition"
                   >
                     {tag}
-                  </button>
+                  </Link>
                 </li>
               ))
             ) : (
