@@ -37,11 +37,11 @@ resource "aws_s3_bucket_policy" "main" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Sid    = "AllowCloudFrontAccess"
-      Effect = "Allow"
+      Sid       = "AllowCloudFrontAccess"
+      Effect    = "Allow"
       Principal = { Service = "cloudfront.amazonaws.com" }
-      Action   = "s3:GetObject"
-      Resource = "${module.s3.bucket_arn}/*"
+      Action    = "s3:GetObject"
+      Resource  = "${module.s3.bucket_arn}/*"
       Condition = {
         StringEquals = { "AWS:SourceArn" = module.cloudfront.arn }
       }
