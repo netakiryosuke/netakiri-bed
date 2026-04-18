@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAboutContent } from "@/lib/about";
-import styles from "@/app/posts/[slug]/content.module.css";
+import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: "About",
