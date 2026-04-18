@@ -11,12 +11,12 @@ export default function PostCard({ post }: Props) {
     <article className="
         text-white
         rounded-2xl
-        bg-white/5
-        backdrop-blur-md  
+        bg-white/15
+        backdrop-blur-md
         border border-white/10
         p-6
         shadow-lg
-        hover:bg-white/15
+        hover:bg-white/20
         transition
       ">
       <Link href={`/posts/${post.slug}`}>
