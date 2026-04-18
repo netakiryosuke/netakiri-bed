@@ -9,10 +9,17 @@ resource "aws_cloudfront_distribution" "main" {
     origin_access_control_id = var.oac_id
   }
 
+  # S3+OACでは存在しないパスも403で返るため、両方404.htmlへルーティング
   custom_error_response {
     error_code         = 403
-    response_code      = 200
-    response_page_path = "/${var.default_root_object}"
+    response_code      = 404
+    response_page_path = "/404.html"
+  }
+
+  custom_error_response {
+    error_code         = 404
+    response_code      = 404
+    response_page_path = "/404.html"
   }
 
   # ハッシュ付き静的アセットは1年キャッシュ可能
