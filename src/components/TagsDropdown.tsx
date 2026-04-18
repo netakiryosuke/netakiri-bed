@@ -7,7 +7,7 @@ interface Props {
   tags: string[];
 }
 
-const TagsDropdown = ({ tags }: Props) => {
+export default function TagsDropdown({ tags }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
@@ -76,6 +76,4 @@ const TagsDropdown = ({ tags }: Props) => {
       )}
     </div>
   );
-};
-
-export default TagsDropdown;
+}
