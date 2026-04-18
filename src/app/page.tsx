@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <main>
       <section className="fixed inset-0 flex flex-col items-center justify-center z-0">
-        <h1>ブログタイトル</h1>
-        <p className="text-lg text-gray-300">ひとこと説明文</p>
+        <h1 className="text-white">寝たきりBed</h1>
+        <p className="text-lg text-gray-300">寝たきりになっても読めるブログ</p>
       </section>
 
       <section className="relative z-10 p-10 mt-[100vh] min-h-screen bg-white/3 backdrop-blur-sm">
