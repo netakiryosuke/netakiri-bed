@@ -24,14 +24,17 @@ export default async function TagPage({ params }: Props) {
 
   return (
     <main>
-      <h1>{tag}</h1>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.slug}>
-            <PostCard post={post} />
-          </li>
-        ))}
-      </ul>
+      <section className="relative z-10 p-10 min-h-screen bg-white/3 backdrop-blur-sm">
+        <h1 className="text-white">{tag}</h1>
+        <p className="text-gray-400 mb-6">{posts.length}件の記事</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {posts.map((post) => (
+            <li key={post.slug}>
+              <PostCard post={post} />
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
