@@ -33,7 +33,7 @@ export default async function PostPage({ params }: Props) {
   return (
     <main>
       <article className="text-white p-10">
-        <header className="p-8 border-2 border-zinc-700 rounded bg-white/3 backdrop-blur-sm">
+        <header className="p-8 border-2 border-white rounded bg-white/3 backdrop-blur-sm">
           <h1>{post.title}</h1>
           <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
@@ -47,7 +47,7 @@ export default async function PostPage({ params }: Props) {
           )}
         </header>
         <div className="flex gap-8 py-10">
-          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className={`p-8 pt-0 border-2 border-zinc-700 rounded flex-[3] bg-white/3 backdrop-blur-sm ${styles.content}`} />
+          <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className={`p-8 pt-0 border border-white rounded flex-[3] bg-white/3 backdrop-blur-sm ${styles.content}`} />
           <aside className="
             sticky
             top-24
