@@ -7,7 +7,7 @@ interface Props {
   tags: string[];
 }
 
-export default function TagsDropdown({ tags }: Props) {
+const TagsDropdown = ({ tags }: Props) => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
@@ -18,21 +18,21 @@ export default function TagsDropdown({ tags }: Props) {
   );
 
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
+    const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false);
         setQuery("");
       }
-    }
+    };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  function handleSelect(tag: string) {
+  const handleSelect = (tag: string) => {
     router.push(`/tags/${encodeURIComponent(tag)}`);
     setOpen(false);
     setQuery("");
-  }
+  };
 
   return (
     <div ref={ref} className="relative">
@@ -76,4 +76,6 @@ export default function TagsDropdown({ tags }: Props) {
       )}
     </div>
   );
-}
+};
+
+export default TagsDropdown;
