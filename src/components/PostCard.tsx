@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { PostSummary } from "@/types/post";
+import Tag from "./Tag";
 
 interface Props {
   post: PostSummary;
@@ -7,8 +8,7 @@ interface Props {
 
 export default function PostCard({ post }: Props) {
   return (
-    <Link href={`/posts/${post.slug}`}>
-      <article className="
+    <article className="
         text-white
         rounded-2xl
         bg-white/5
@@ -19,17 +19,20 @@ export default function PostCard({ post }: Props) {
         hover:bg-white/15
         transition
       ">
-        <h2>{post.title}</h2>
-        <time dateTime={post.date}>{post.date}</time>
-        {post.description && <p>{post.description}</p>}
-        {post.tags.length > 0 && (
-          <ul>
-            {post.tags.map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>
-        )}
-      </article>
-    </Link>
+      <Link href={`/posts/${post.slug}`}>
+        <h2 className="underline">{post.title}</h2>
+      </Link>
+      <time dateTime={post.date}>{post.date}</time>
+      {post.description && <p>{post.description}</p>}
+      {post.tags.length > 0 && (
+        <ul className="flex flex-row gap-2 mt-4">
+          {post.tags.map((tag) => (
+            <li key={tag}>
+              <Tag tagName={tag} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </article>
   );
 }
