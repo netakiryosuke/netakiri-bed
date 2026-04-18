@@ -10,7 +10,7 @@ export default function Footer() {
           Late Night
         </span>
       </div>
-      <span>Written from my bed</span>
+      <span className="text-lg font-en">Written from my bed</span>
       <span>© 2026 Ryosuke Osawa</span>
     </footer>
   );

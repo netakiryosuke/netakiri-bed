@@ -16,7 +16,7 @@ export default function Header() {
         </span>
       </Link>
       <nav aria-label="Primary">
-        <ul className="flex flex-row gap-4 items-center">
+        <ul className="flex flex-row gap-4 items-center text-xl font-en">
           <li><Link href="/">Home</Link></li>
           <li><TagsDropdown tags={tags} /></li>
           <li><Link href="/about">About</Link></li>
