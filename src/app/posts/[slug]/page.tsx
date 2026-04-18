@@ -56,7 +56,7 @@ export default async function PostPage({ params }: Props) {
             rounded
             flex-[1]
             text-black
-            bg-white/50 backdrop-blur
+            bg-white/90
           ">
             <Toc items={post.toc}/>
           </aside>
