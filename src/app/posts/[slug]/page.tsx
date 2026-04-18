@@ -38,7 +38,7 @@ export default async function PostPage({ params }: Props) {
           <h1>{post.title}</h1>
           <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
-            <ul>
+            <ul className="flex flex-row gap-2 mt-4">
               {post.tags.map((tag) => (
                 <li key={tag}>
                   <Tag tagName={tag} />
