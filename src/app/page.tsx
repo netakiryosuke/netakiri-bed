@@ -7,8 +7,14 @@ export default function Home() {
   return (
     <main>
       <section className="fixed inset-0 flex flex-col items-center justify-center z-0">
-        <h1 className="text-white">寝たきりBed</h1>
-        <p className="text-lg text-gray-300">寝たきりになっても読めるブログ</p>
+        <div className="flex gap-2 text-white text-4xl items-baseline">
+          <span className="font-jp text-3xl">寝たきり</span>
+          <span className="opacity-50">|</span>
+          <span className="font-en tracking-wide">
+            Late Night
+          </span>
+        </div>
+        <p className="text-md text-gray-300 pt-2">ベッドで読み返せるような、そんな深夜のメモ</p>
       </section>
 
       <section className="relative z-10 p-10 mt-[100vh] min-h-screen bg-white/3 backdrop-blur-sm">
