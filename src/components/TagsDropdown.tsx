@@ -40,8 +40,9 @@ export default function TagsDropdown({ tags }: Props) {
         onClick={() => setOpen((prev) => !prev)}
         aria-haspopup="listbox"
         aria-expanded={open}
+        className="cursor-pointer hover:text-white/80"
       >
-        Tags
+        Tags <span className="ml-1 text-xs">▼</span>
       </button>
 
       {open && (
@@ -62,7 +63,7 @@ export default function TagsDropdown({ tags }: Props) {
                 <li key={tag} role="option">
                   <button
                     onClick={() => handleSelect(tag)}
-                    className="w-full text-left px-4 py-1.5 text-sm text-white hover:bg-white/10 transition"
+                    className="w-full text-left px-4 py-1.5 text-sm text-white hover:bg-white/10 cursor-pointer transition"
                   >
                     {tag}
                   </button>
