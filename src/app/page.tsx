@@ -14,7 +14,7 @@ export default function Home() {
             Late Night
           </span>
         </div>
-        <p className="text-md text-gray-300 pt-2">ベッドで読み返せるような、そんな深夜のメモ</p>
+        <p className="text-base text-gray-300 pt-2">ベッドで読み返せるような、そんな深夜のメモ</p>
       </section>
 
       <section className="relative z-10 p-10 mt-[100vh] min-h-screen bg-white/3 backdrop-blur-sm">
