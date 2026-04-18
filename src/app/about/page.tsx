@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Toc from "@/components/Toc";
 import { getAboutContent } from "@/lib/about";
 import styles from "@/app/posts/[slug]/content.module.css";
 
@@ -8,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const { contentHtml, toc } = await getAboutContent();
+  const { contentHtml } = await getAboutContent();
 
   return (
     <main>
