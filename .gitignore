@@ -43,6 +43,7 @@ next-env.d.ts
 #################################################################
 # Default .gitignore content for all Terraform Modules
 #################################################################
+**/envs/
 
 .DS_Store
 .idea/
