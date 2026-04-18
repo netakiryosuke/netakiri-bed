@@ -11,7 +11,7 @@ export default function Home() {
         <p className="text-lg text-gray-300">ひとこと説明文</p>
       </section>
 
-      <section className="relative z-10 p-10 mt-[100vh] bg-zinc-900 min-h-screen">
+      <section className="relative z-10 p-10 mt-[100vh] min-h-screen bg-white/10 backdrop-blur-xl border-t border-white/20">
         <h2 className="text-white">記事一覧</h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {posts.map((post) => (
