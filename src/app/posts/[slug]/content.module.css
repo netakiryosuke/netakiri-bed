@@ -125,6 +125,7 @@
 
 .content :global(strong) {
   font-weight: 700;
+  color: rgba(255, 240, 27, 0.9);
 }
 
 .content :global(em) {
