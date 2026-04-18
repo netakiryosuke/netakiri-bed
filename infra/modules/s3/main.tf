@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "main" {
   bucket = var.bucket_name
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_account_public_access_block
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block
 resource "aws_s3_bucket_public_access_block" "main" {
   bucket = aws_s3_bucket.main.id
 
