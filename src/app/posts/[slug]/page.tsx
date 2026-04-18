@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import Toc from "@/components/Toc";
-import Link from "next/link";
 import styles from "./content.module.css";
+import Tag from "@/components/Tag";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -37,10 +37,10 @@ export default async function PostPage({ params }: Props) {
           <h1>{post.title}</h1>
           <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
-            <ul>
+            <ul className="flex flex-row flex-wrap gap-2 mt-4">
               {post.tags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
+                  <Tag tagName={tag} />
                 </li>
               ))}
             </ul>
