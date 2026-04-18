@@ -25,7 +25,7 @@ export default function PostCard({ post }: Props) {
       <time dateTime={post.date}>{post.date}</time>
       {post.description && <p>{post.description}</p>}
       {post.tags.length > 0 && (
-        <ul className="flex flex-row gap-2 mt-4">
+        <ul className="flex flex-row flex-wrap gap-2 mt-4">
           {post.tags.map((tag) => (
             <li key={tag}>
               <Tag tagName={tag} />
