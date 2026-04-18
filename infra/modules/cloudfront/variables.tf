@@ -23,32 +23,3 @@ variable "default_root_object" {
   default = "index.html"
 }
 
-variable "allowed_methods" {
-  type    = list(string)
-  default = ["GET", "HEAD"]
-}
-
-variable "cached_methods" {
-  type    = list(string)
-  default = ["GET", "HEAD"]
-}
-
-variable "viewer_protocol_policy" {
-  type    = string
-  default = "redirect-to-https"
-}
-
-variable "min_ttl" {
-  type    = number
-  default = 0
-}
-
-variable "default_ttl" {
-  type    = number
-  default = 3600
-}
-
-variable "max_ttl" {
-  type    = number
-  default = 86400
-}
