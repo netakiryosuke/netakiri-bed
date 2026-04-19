@@ -51,10 +51,10 @@ export default function TagsDropdown({ tags, onSelect }: Props) {
               className="w-full rounded px-2 py-1 text-sm bg-white/10 text-white placeholder-white/40 outline-none border border-white/20 focus:border-white/50"
             />
           </div>
-          <ul role="menu" className="max-h-60 overflow-y-auto pb-2">
+          <ul className="max-h-60 overflow-y-auto pb-2">
             {filtered.length > 0 ? (
               filtered.map((tag) => (
-                <li key={tag} role="menuitem">
+                <li key={tag}>
                   <Link
                     href={`/tags/${encodeURIComponent(tag)}`}
                     onClick={() => { setOpen(false); setQuery(""); onSelect?.(); }}
