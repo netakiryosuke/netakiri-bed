@@ -1,0 +1,44 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import TagsDropdown from "./TagsDropdown";
+
+interface Props {
+  tags: string[];
+}
+
+export default function HamburgerMenu({ tags }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const close = () => setIsOpen(false);
+
+  return (
+    <div className="md:hidden">
+      <button
+        type="button"
+        aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
+        aria-expanded={isOpen}
+        aria-controls="mobile-nav"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex justify-center items-center w-8 h-8 cursor-pointer text-white text-2xl"
+      >
+        {isOpen ? "✕" : "☰"}
+      </button>
+
+      {isOpen && (
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="fixed top-[var(--header-height)] left-0 right-0 bg-[rgba(5,5,39,0.97)] border-t border-white/10 z-40 px-6 py-4 flex flex-col gap-4 text-white text-lg font-en"
+        >
+          <Link href="/" onClick={close} className="hover:opacity-70 transition-opacity">Home</Link>
+          <div>
+            <TagsDropdown tags={tags} onSelect={close} />
+          </div>
+          <Link href="/about" onClick={close} className="hover:opacity-70 transition-opacity">About</Link>
+        </nav>
+      )}
+    </div>
+  );
+}

@@ -5,9 +5,10 @@ import Link from "next/link";
 
 interface Props {
   tags: string[];
+  onSelect?: () => void;
 }
 
-export default function TagsDropdown({ tags }: Props) {
+export default function TagsDropdown({ tags, onSelect }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const ref = useRef<HTMLDivElement>(null);
@@ -47,17 +48,16 @@ export default function TagsDropdown({ tags }: Props) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="タグを検索..."
-              autoFocus
               className="w-full rounded px-2 py-1 text-sm bg-white/10 text-white placeholder-white/40 outline-none border border-white/20 focus:border-white/50"
             />
           </div>
-          <ul role="menu" className="max-h-60 overflow-y-auto pb-2">
+          <ul className="max-h-60 overflow-y-auto pb-2">
             {filtered.length > 0 ? (
               filtered.map((tag) => (
-                <li key={tag} role="menuitem">
+                <li key={tag}>
                   <Link
                     href={`/tags/${encodeURIComponent(tag)}`}
-                    onClick={() => { setOpen(false); setQuery(""); }}
+                    onClick={() => { setOpen(false); setQuery(""); onSelect?.(); }}
                     className="block w-full px-4 py-1.5 text-sm text-white hover:bg-white/10 transition"
                   >
                     {tag}

@@ -131,3 +131,8 @@
 .content :global(em) {
   font-style: italic;
 }
+
+.content {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
