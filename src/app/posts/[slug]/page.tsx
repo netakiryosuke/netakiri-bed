@@ -34,7 +34,7 @@ export default async function PostPage({ params }: Props) {
     <main>
       <article className="text-white p-4 md:p-10">
         <header className="mt-4 p-6 md:p-12 border-2 border-white rounded bg-white/3 backdrop-blur-sm">
-          <h1 className="text-2xl font-bold">{post.title}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold">{post.title}</h1>
           <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
             <ul className="flex flex-row flex-wrap gap-2 mt-4">
