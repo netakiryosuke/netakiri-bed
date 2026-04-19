@@ -34,7 +34,7 @@ export default async function PostPage({ params }: Props) {
     <main>
       <article className="text-white p-4 md:p-10">
         <header className="mt-4 p-6 md:p-12 border-2 border-white rounded bg-white/3 backdrop-blur-sm">
-          <h1>{post.title}</h1>
+          <h1 className="text-2xl font-bold">{post.title}</h1>
           <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
             <ul className="flex flex-row flex-wrap gap-2 mt-4">
@@ -46,7 +46,7 @@ export default async function PostPage({ params }: Props) {
             </ul>
           )}
           {post.toc.length > 0 && (
-            <details className="md:hidden mt-6 text-white">
+            <details className="lg:hidden mt-6 text-white">
               <summary className="cursor-pointer text-sm font-semibold">目次を開く</summary>
               <div className="mt-2 text-white/80">
                 <Toc items={post.toc} />
@@ -58,13 +58,14 @@ export default async function PostPage({ params }: Props) {
           <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className={`p-4 md:p-8 pt-0 border border-white rounded w-full md:flex-[3] bg-white/3 backdrop-blur-sm ${styles.content}`} />
           {post.toc.length > 0 && (
             <aside className="
-              hidden md:block
+              hidden lg:block
               sticky
               top-24
               self-start
               border border-transparent
               rounded
               flex-[1]
+              min-w-[200px]
               text-black
               bg-white/90
             ">
