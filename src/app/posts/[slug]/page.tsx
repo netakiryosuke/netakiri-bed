@@ -47,7 +47,7 @@ export default async function PostPage({ params }: Props) {
           )}
           {post.toc.length > 0 && (
             <details className="md:hidden mt-6 text-white">
-              <summary className="cursor-pointer text-sm font-semibold">目次</summary>
+              <summary className="cursor-pointer text-sm font-semibold">目次を開く</summary>
               <div className="mt-2 text-white/80">
                 <Toc items={post.toc} />
               </div>
