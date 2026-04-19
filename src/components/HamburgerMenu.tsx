@@ -13,7 +13,6 @@ export default function HamburgerMenu({ tags }: Props) {
 
   const close = () => setIsOpen(false);
 
-  // ページ遷移時に閉じる（ルート変化を検知）
   useEffect(() => {
     close();
   }, []);
@@ -28,7 +27,7 @@ export default function HamburgerMenu({ tags }: Props) {
         className="flex flex-col justify-center items-center w-8 h-8 gap-1.5 cursor-pointer"
       >
         <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${isOpen ? "translate-y-2 rotate-45" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-white transition-opacity duration-300 ${isOpen ? "opacity-0" : ""}`} />
+        <span className={`block w-6 h-0.5 bg-white transition-opacity duration-100 ${isOpen ? "opacity-0" : ""}`} />
         <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${isOpen ? "-translate-y-2 -rotate-45" : ""}`} />
       </button>
 

@@ -17,7 +17,6 @@ export default function Header() {
         </span>
       </Link>
 
-      {/* PC: 通常ナビ */}
       <nav aria-label="Primary" className="hidden md:block">
         <ul className="flex flex-row gap-4 items-center text-xl font-en">
           <li><Link href="/">Home</Link></li>
@@ -26,7 +25,6 @@ export default function Header() {
         </ul>
       </nav>
 
-      {/* スマホ: ハンバーガーメニュー */}
       <HamburgerMenu tags={tags} />
     </header>
   );
