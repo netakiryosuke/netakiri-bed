@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import TagsDropdown from "./TagsDropdown";
 
@@ -12,10 +12,6 @@ export default function HamburgerMenu({ tags }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const close = () => setIsOpen(false);
-
-  useEffect(() => {
-    close();
-  }, []);
 
   return (
     <div className="md:hidden">
