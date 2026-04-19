@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./Header.module.css";
 import TagsDropdown from "./TagsDropdown";
+import HamburgerMenu from "./HamburgerMenu";
 import { getAllTags } from "@/lib/posts";
 
 export default function Header() {
@@ -15,13 +16,18 @@ export default function Header() {
           Late Night
         </span>
       </Link>
-      <nav aria-label="Primary">
+
+      {/* PC: 通常ナビ */}
+      <nav aria-label="Primary" className="hidden md:block">
         <ul className="flex flex-row gap-4 items-center text-xl font-en">
           <li><Link href="/">Home</Link></li>
           <li><TagsDropdown tags={tags} /></li>
           <li><Link href="/about">About</Link></li>
         </ul>
       </nav>
+
+      {/* スマホ: ハンバーガーメニュー */}
+      <HamburgerMenu tags={tags} />
     </header>
   );
 }
