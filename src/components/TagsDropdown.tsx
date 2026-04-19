@@ -48,7 +48,6 @@ export default function TagsDropdown({ tags, onSelect }: Props) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="タグを検索..."
-              autoFocus
               className="w-full rounded px-2 py-1 text-sm bg-white/10 text-white placeholder-white/40 outline-none border border-white/20 focus:border-white/50"
             />
           </div>
