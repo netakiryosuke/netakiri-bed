@@ -6,7 +6,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="fixed inset-0 flex flex-col items-center justify-center z-0">
+      <section className="fixed top-0 left-0 w-full h-[100lvh] flex flex-col items-center justify-center z-0">
         <h1 className="flex gap-2 text-white text-4xl font-normal tracking-normal items-baseline">
           <span className="font-jp text-3xl">寝たきり</span>
           <span aria-hidden="true" className="opacity-50">|</span>
