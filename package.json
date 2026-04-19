@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview": "next build && npx serve out -l 3001"
   },
   "dependencies": {
     "@shikijs/rehype": "^4.0.2",
