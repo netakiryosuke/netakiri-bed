@@ -17,7 +17,7 @@ export default function Home() {
         <p className="text-base text-gray-300 pt-2">ベッドで読み返せるような、そんな深夜のメモ</p>
       </section>
 
-      <section className="relative z-10 p-10 mt-[100vh] min-h-screen bg-white/3 backdrop-blur-sm">
+      <section className="relative z-10 p-10 mt-[100lvh] min-h-screen bg-white/3 backdrop-blur-sm">
         <h2 className="text-white">記事一覧</h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {posts.map((post) => (
