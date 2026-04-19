@@ -1,15 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./Header.module.css";
 import TagsDropdown from "./TagsDropdown";
 import HamburgerMenu from "./HamburgerMenu";
-import { getAllTags } from "@/lib/posts";
 
-export default function Header() {
-  const tags = getAllTags();
+interface Props {
+  tags: string[];
+}
+
+export default function Header({ tags }: Props) {
+
+  const handleHomeClick = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <header className={styles.header}>
-      <Link href="/" className="flex gap-2">
+      <Link href="/" className="flex gap-2" onClick={handleHomeClick}>
         <span className="font-jp text-xl">寝たきり</span>
         <span aria-hidden="true" className="opacity-50">|</span>
         <span className="font-en text-xl tracking-wide">
@@ -19,9 +27,14 @@ export default function Header() {
 
       <nav aria-label="Primary" className="hidden md:block">
         <ul className="flex flex-row gap-4 items-center text-xl font-en">
-          <li><Link href="/">Home</Link></li>
+          <li>
+            <Link href="/" onClick={handleHomeClick}>
+              Home
+            </Link>
+          </li>
           <li><TagsDropdown tags={tags} /></li>
-          <li><Link href="/about">About</Link></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="https://github.com/netakiryosuke/netakiri-bed" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         </ul>
       </nav>
 

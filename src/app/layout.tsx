@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Noto_Serif_JP, Cormorant_Garamond } from "next/font/
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { getAllTags } from "@/lib/posts";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,8 @@ export const metadata: Metadata = {
   description: "netakiri-bed",
 };
 
+const tags = getAllTags();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +46,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${notoSerifJP.variable} ${cormorantGaramond.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col text-white overflow-x-hidden">
-        <Header />
+        <Header tags={tags} />
         {children}
         <Footer />
       </body>
