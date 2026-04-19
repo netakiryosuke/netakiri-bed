@@ -33,7 +33,7 @@ export default async function PostPage({ params }: Props) {
   return (
     <main>
       <article className="text-white p-4 md:p-10">
-        <header className="p-6 md:p-12 border-2 border-white rounded bg-white/3 backdrop-blur-sm">
+        <header className="mt-4 p-6 md:p-12 border-2 border-white rounded bg-white/3 backdrop-blur-sm">
           <h1>{post.title}</h1>
           <time dateTime={post.date}>{post.date}</time>
           {post.tags.length > 0 && (
