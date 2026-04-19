@@ -24,11 +24,9 @@ export default function HamburgerMenu({ tags }: Props) {
         aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex flex-col justify-center items-center w-8 h-8 gap-1.5 cursor-pointer"
+        className="flex justify-center items-center w-8 h-8 cursor-pointer text-white text-2xl"
       >
-        <span className={`block w-6 h-0.5 bg-white ${isOpen ? "translate-y-2 rotate-45" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-white ${isOpen ? "hidden" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-white ${isOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+        {isOpen ? "✕" : "☰"}
       </button>
 
       {isOpen && (
