@@ -34,7 +34,7 @@ function buildNestedItems(items: TocItem[]): NestedTocItem[] {
 
 function TocList({ items, depth = 0 }: { items: NestedTocItem[]; depth?: number }) {
   return (
-    <ol className={depth > 0 ? "ml-3 mt-1 border-l border-black/15 pl-2" : ""}>
+    <ol className={depth > 0 ? "ml-3 mt-1 border-l border-white/20 pl-2 md:border-black/15" : ""}>
       {items.map((item) => (
         <li key={item.id} className="mb-1.5">
           <Link
