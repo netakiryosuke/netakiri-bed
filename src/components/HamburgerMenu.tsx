@@ -36,7 +36,7 @@ export default function HamburgerMenu({ tags }: Props) {
         >
           <Link href="/" onClick={close} className="hover:opacity-70 transition-opacity">Home</Link>
           <div>
-            <TagsDropdown tags={tags} />
+          <TagsDropdown tags={tags} onSelect={close} />
           </div>
           <Link href="/about" onClick={close} className="hover:opacity-70 transition-opacity">About</Link>
         </nav>

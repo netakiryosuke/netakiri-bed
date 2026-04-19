@@ -5,9 +5,10 @@ import Link from "next/link";
 
 interface Props {
   tags: string[];
+  onSelect?: () => void;
 }
 
-export default function TagsDropdown({ tags }: Props) {
+export default function TagsDropdown({ tags, onSelect }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const ref = useRef<HTMLDivElement>(null);
@@ -57,7 +58,7 @@ export default function TagsDropdown({ tags }: Props) {
                 <li key={tag} role="menuitem">
                   <Link
                     href={`/tags/${encodeURIComponent(tag)}`}
-                    onClick={() => { setOpen(false); setQuery(""); }}
+                    onClick={() => { setOpen(false); setQuery(""); onSelect?.(); }}
                     className="block w-full px-4 py-1.5 text-sm text-white hover:bg-white/10 transition"
                   >
                     {tag}
