@@ -56,19 +56,21 @@ export default async function PostPage({ params }: Props) {
         </header>
         <div className="flex gap-8 py-6 md:py-10">
           <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} className={`p-4 md:p-8 pt-0 border border-white rounded w-full md:flex-[3] bg-white/3 backdrop-blur-sm ${styles.content}`} />
-          <aside className="
-            hidden md:block
-            sticky
-            top-24
-            self-start
-            border border-transparent
-            rounded
-            flex-[1]
-            text-black
-            bg-white/90
-          ">
-            <Toc items={post.toc}/>
-          </aside>
+          {post.toc.length > 0 && (
+            <aside className="
+              hidden md:block
+              sticky
+              top-24
+              self-start
+              border border-transparent
+              rounded
+              flex-[1]
+              text-black
+              bg-white/90
+            ">
+              <Toc items={post.toc}/>
+            </aside>
+          )}
         </div>
       </article>
     </main>
