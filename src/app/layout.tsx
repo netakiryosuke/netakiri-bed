@@ -42,7 +42,7 @@ export default function RootLayout({
       lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} ${notoSerifJP.variable} ${cormorantGaramond.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[url('/background.png')] bg-cover bg-fixed bg-no-repeat bg-center text-white">
+      <body className="min-h-full flex flex-col bg-[url('/background.png')] bg-cover bg-fixed bg-no-repeat bg-center text-white overflow-x-hidden">
         <Header />
         {children}
         <Footer />
