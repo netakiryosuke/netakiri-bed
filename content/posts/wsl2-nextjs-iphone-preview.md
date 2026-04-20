@@ -1,7 +1,7 @@
 ---
 title: "Wi-FiなしのWSL2環境でNext.jsの開発サーバーをiPhoneで確認する"
 date: "2026-04-20"
-tags: ["Next.js", "WSL", "Windows"]
+tags: ["Next.js", "WSL", "Windows", "Network"]
 description: このブログを構築する際、スマホで開発サーバにアクセスするときにハマった話です。
 ---
 
