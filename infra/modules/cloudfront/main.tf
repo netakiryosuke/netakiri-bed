@@ -1,3 +1,21 @@
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_function
+resource "aws_cloudfront_function" "url_rewrite" {
+  name    = "${var.function_name_prefix}-url-rewrite"
+  runtime = "cloudfront-js-2.0"
+  publish = true
+  code    = <<-EOT
+    function handler(event) {
+      var uri = event.request.uri;
+      if (uri.endsWith('/')) {
+        event.request.uri = uri + 'index.html';
+      } else if (!uri.includes('.')) {
+        event.request.uri = uri + '/index.html';
+      }
+      return event.request;
+    }
+  EOT
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
 resource "aws_cloudfront_distribution" "main" {
   enabled             = true
@@ -9,7 +27,6 @@ resource "aws_cloudfront_distribution" "main" {
     origin_access_control_id = var.oac_id
   }
 
-  # S3+OACでは存在しないパスも403で返るため、両方404.htmlへルーティング
   custom_error_response {
     error_code         = 403
     response_code      = 404
@@ -42,6 +59,11 @@ resource "aws_cloudfront_distribution" "main" {
     cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6" # CachingOptimized
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.url_rewrite.arn
+    }
   }
 
   price_class = "PriceClass_200"

@@ -29,6 +29,7 @@ module "cloudfront" {
   oac_id                      = module.s3.oac_id
   domain_name                 = var.domain_name
   acm_certificate_arn         = module.acm.certificate_arn
+  function_name_prefix        = var.project
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy

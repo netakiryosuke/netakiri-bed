@@ -23,3 +23,7 @@ variable "default_root_object" {
   default = "index.html"
 }
 
+variable "function_name_prefix" {
+  type = string
+}
+
