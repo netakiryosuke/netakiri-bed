@@ -1,0 +1,81 @@
+name: Textlint
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "content/**"
+      - ".textlintrc.json"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - "content/**"
+      - ".textlintrc.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  textlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run textlint
+        id: textlint
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run lint:text 2>&1 | tee textlint-result.txt
+
+      - name: Comment textlint result to PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            let result = '';
+            if (fs.existsSync('textlint-result.txt')) {
+              result = fs.readFileSync('textlint-result.txt', 'utf8').trim();
+            }
+
+            const body = [
+              '### Textlint Results',
+              '',
+              '<details>',
+              '<summary>詳細を表示</summary>',
+              '',
+              '```',
+              result || 'No errors found.',
+              '```',
+              '',
+              '</details>',
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+      - name: Fail if textlint failed
+        if: steps.textlint.outcome == 'failure'
+        run: exit 1
