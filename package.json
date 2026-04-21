@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:text": "textlint \"content/**/*.md\"",
+    "lint:text:fix": "textlint --fix \"content/**/*.md\"",
     "preview": "next build && npx serve out -l 3001"
   },
   "dependencies": {
@@ -32,6 +34,10 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
     "tailwindcss": "^4",
+    "textlint": "^15.5.4",
+    "textlint-filter-rule-allowlist": "^4.0.0",
+    "textlint-rule-preset-ja-spacing": "^2.4.3",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.2",
     "typescript": "^5"
   }
 }
