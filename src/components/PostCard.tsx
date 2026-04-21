@@ -9,6 +9,7 @@ interface Props {
 export default function PostCard({ post }: Props) {
   return (
     <article className="
+        h-full
         text-white
         rounded-2xl
         bg-white/15
