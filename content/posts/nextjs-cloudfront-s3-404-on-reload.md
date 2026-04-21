@@ -16,11 +16,11 @@ description: Next.js の静的エクスポートを CloudFront + S3 (OAC) で配
 
 ・・・え？
 
-慌てて開発サーバで確認したところ、404にはならず。・・・もしかしてインフラの問題ってこと？面倒なことになったな～～～と思いながら調査をはじめました。
+慌てて開発サーバで確認したところ、404 にはならず。・・・もしかしてインフラの問題ってこと？面倒なことになったな～～～と思いながら調査をはじめました。
 
 ## 何が起きていたんだ
 
-このブログは Next.js (App Router) で構築しており、`output: 'export'` で静的HTMLを生成して S3 にアップロード、CloudFront 経由で配信しています。
+このブログは Next.js (App Router) で構築しており、`output: 'export'` で静的 HTML を生成して S3 にアップロード、CloudFront 経由で配信しています。
 
 症状をまとめるとこうです。
 
@@ -35,11 +35,11 @@ description: Next.js の静的エクスポートを CloudFront + S3 (OAC) で配
 
 ## なぜ初回遷移は成功したんだ
 
-Next.js の `<Link>` によるページ遷移は、ブラウザが実際にHTTPリクエストを送りません。JavaScript が DOM を書き換えるだけです。
+Next.js の `<Link>` によるページ遷移は、ブラウザが実際に HTTP リクエストを送りません。JavaScript が DOM を書き換えるだけです。
 
 つまり S3 上にファイルがあろうがなかろうが関係ないのです。
 
-一方、リロードや直接URLアクセスでは**ブラウザが CloudFront に HTTP リクエストを送る**ので、S3 上のファイルパスとURLが一致しないと404になります。（厳密には403を404ページにリダイレクトしている）
+一方、リロードや直接 URL アクセスでは**ブラウザが CloudFront に HTTP リクエストを送る**ので、S3 上のファイルパスと URL が一致しないと 404 になります。（厳密には 403 を 404 ページにリダイレクトしている）
 
 ## 原因
 
@@ -57,7 +57,7 @@ out/
     └── Python.html
 ```
 
-CloudFront + S3 (OAC) の構成では、リクエストされたURLパスがそのまま S3 のキーとして使われます。
+CloudFront + S3 (OAC) の構成では、リクエストされた URL パスがそのまま S3 のキーとして使われます。
 
 ```
 リクエスト: /posts/my-article
@@ -71,7 +71,7 @@ S3 の静的ウェブサイトホスティングを使えば `index.html` の自
 
 ## どうやって解決したんだ
 
-2つの変更を組み合わせました。
+2 つの変更を組み合わせました。
 
 ### 1. trailingSlash: true を有効にする
 
@@ -102,7 +102,7 @@ out/
 
 ### 2. CloudFront Function でURLをリライトする
 
-S3 にリクエストが届く前に、URLの末尾に `/index.html` を付けます。
+S3 にリクエストが届く前に、URL の末尾に `/index.html` を付けます。
 
 ```javascript
 function handler(event) {
@@ -118,7 +118,7 @@ function handler(event) {
 }
 ```
 
-`trailingSlash: true` と組み合わせることで、`/tags/Next.js/` のようなドット入りURLでも `uri.endsWith('/')` で正しくマッチします。`.` の有無ではなく `/` の有無で判定するので、タグ名にどんな文字が含まれていても安全です。
+`trailingSlash: true` と組み合わせることで、`/tags/Next.js/` のようなドット入り URL でも `uri.endsWith('/')` で正しくマッチします。`.` の有無ではなく `/` の有無で判定するので、タグ名にどんな文字が含まれていても安全です。
 
 ### Terraform に追加
 
@@ -158,7 +158,7 @@ default_cache_behavior {
 
 ## まとめ
 
-Next.js + CloudFront + S3 の構成は定番ですが、OAC を使う場合はURLリライトがほぼ必須です。
+Next.js + CloudFront + S3 の構成は定番ですが、OAC を使う場合は URL リライトがほぼ必須です。
 全然知らなかったのですが、割と常識らしいです。
 
 勉強不足を痛感しますね。
