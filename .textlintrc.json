@@ -18,7 +18,12 @@
     },
     "preset-ja-technical-writing": {
       "ja-no-weak-phrase": false,
-      "ja-no-mixed-period": false,
+      "ja-no-mixed-period": {
+        "periodMark": "。",
+        "allowPeriodMarks": [".", "…"],
+        "allowEmojiAtEnd": true,
+        "forceAppendPeriod": false
+      },
       "no-doubled-conjunctive-particle-ga": false,
       "sentence-length": {
         "max": 150
