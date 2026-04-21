@@ -1,0 +1,44 @@
+{
+  "filters": {
+    "allowlist": {
+      "allow": [
+        "/^```[\\s\\S]*?```$/m"
+      ]
+    }
+  },
+  "rules": {
+    "preset-ja-spacing": {
+      "ja-space-between-half-and-full-width": {
+        "space": "always"
+      },
+      "ja-space-around-code": {
+        "before": true,
+        "after": true
+      }
+    },
+    "preset-ja-technical-writing": {
+      "ja-no-weak-phrase": false,
+      "ja-no-mixed-period": {
+        "periodMark": "。",
+        "allowPeriodMarks": [".", "…"],
+        "allowEmojiAtEnd": true,
+        "forceAppendPeriod": false
+      },
+      "no-doubled-conjunctive-particle-ga": false,
+      "sentence-length": {
+        "max": 150
+      },
+      "max-comma": {
+        "max": 4
+      },
+      "no-exclamation-question-mark": false,
+      "ja-no-successive-word": {
+        "allow": ["・", "…", "よし", "なんと", "ある"]
+      },
+      "no-doubled-joshi": {
+        "strict": false,
+        "allow": ["も", "や", "か", "は", "が", "に", "と"]
+      }
+    }
+  }
+}
