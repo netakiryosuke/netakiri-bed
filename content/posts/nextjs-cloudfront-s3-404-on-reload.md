@@ -105,17 +105,18 @@ out/
 S3 にリクエストが届く前に、URL の末尾に `/index.html` を付けます。
 
 ```javascript
+var STATIC_EXT = /\.(ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf|xml|txt|pdf|html|css|json|map)$/i;
+
 function handler(event) {
-      var uri = event.request.uri;
-      if (uri.endsWith('/')) {
-        event.request.uri = uri + 'index.html';
-      } else if (!STATIC_EXT.test(uri)) {
-        // ドット入りスラグ（例: /tags/Next.js）も対象にするため、
-        // 拡張子を持たない場合のみ index.html にリライト
-        event.request.uri = uri + '/index.html';
-      }
-      return event.request;
-    }
+  var uri = event.request.uri;
+  if (uri.endsWith('/')) {
+    event.request.uri = uri + 'index.html';
+  } else if (!STATIC_EXT.test(uri)) {
+    // 静的アセット拡張子以外（ドット入りスラグ含む）は index.html にリライト
+    event.request.uri = uri + '/index.html';
+  }
+  return event.request;
+}
 ```
 
 ### Terraform に追加
@@ -134,8 +135,7 @@ resource "aws_cloudfront_function" "url_rewrite" {
       if (uri.endsWith('/')) {
         event.request.uri = uri + 'index.html';
       } else if (!STATIC_EXT.test(uri)) {
-        // ドット入りスラグ（例: /tags/Next.js）も対象にするため、
-        // 拡張子を持たない場合のみ index.html にリライト
+        // 静的アセット拡張子以外（ドット入りスラグ含む）は index.html にリライト
         event.request.uri = uri + '/index.html';
       }
       return event.request;

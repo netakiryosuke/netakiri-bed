@@ -10,8 +10,7 @@ resource "aws_cloudfront_function" "url_rewrite" {
       if (uri.endsWith('/')) {
         event.request.uri = uri + 'index.html';
       } else if (!STATIC_EXT.test(uri)) {
-        // ドット入りスラグ（例: /tags/Next.js）も対象にするため、
-        // 拡張子を持たない場合のみ index.html にリライト
+        // 静的アセット拡張子以外（ドット入りスラグ含む）は index.html にリライト
         event.request.uri = uri + '/index.html';
       }
       return event.request;
