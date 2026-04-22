@@ -105,20 +105,19 @@ out/
 S3 にリクエストが届く前に、URL の末尾に `/index.html` を付けます。
 
 ```javascript
+var STATIC_EXT = /\.(ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf|xml|txt|pdf|html|css|json|map)$/i;
+
 function handler(event) {
   var uri = event.request.uri;
   if (uri.endsWith('/')) {
-    // /posts/my-article/ → /posts/my-article/index.html
     event.request.uri = uri + 'index.html';
-  } else if (!uri.includes('.')) {
-    // /posts/my-article → /posts/my-article/index.html
+  } else if (!STATIC_EXT.test(uri)) {
+    // 静的アセット拡張子以外（ドット入りスラグ含む）は index.html にリライト
     event.request.uri = uri + '/index.html';
   }
   return event.request;
 }
 ```
-
-`trailingSlash: true` と組み合わせることで、`/tags/Next.js/` のようなドット入り URL でも `uri.endsWith('/')` で正しくマッチします。`.` の有無ではなく `/` の有無で判定するので、タグ名にどんな文字が含まれていても安全です。
 
 ### Terraform に追加
 
@@ -130,11 +129,13 @@ resource "aws_cloudfront_function" "url_rewrite" {
   runtime = "cloudfront-js-2.0"
   publish = true
   code    = <<-EOT
+    var STATIC_EXT = /\.(ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf|xml|txt|pdf|html|css|json|map)$/i;
     function handler(event) {
       var uri = event.request.uri;
       if (uri.endsWith('/')) {
         event.request.uri = uri + 'index.html';
-      } else if (!uri.includes('.')) {
+      } else if (!STATIC_EXT.test(uri)) {
+        // 静的アセット拡張子以外（ドット入りスラグ含む）は index.html にリライト
         event.request.uri = uri + '/index.html';
       }
       return event.request;

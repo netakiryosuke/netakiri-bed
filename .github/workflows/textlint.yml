@@ -54,7 +54,7 @@ jobs:
                 per_page: 100,
               });
               files = response.data
-                .filter(f => f.status === 'added' && f.filename.startsWith('content/') && f.filename.endsWith('.md'))
+                .filter(f => (f.status === 'added' || f.status === 'modified') && f.filename.startsWith('content/') && f.filename.endsWith('.md'))
                 .map(f => f.filename);
             } else if (context.eventName === 'workflow_dispatch') {
               // 手動実行: 全ファイル対象
@@ -65,7 +65,7 @@ jobs:
               const before = context.payload.before;
               try {
                 const output = execSync(
-                  `git diff --name-only --diff-filter=A ${before} HEAD -- content/`,
+                  `git diff --name-only --diff-filter=AM ${before} HEAD -- content/`,
                 ).toString().trim();
                 files = output ? output.split('\n').filter(f => f.endsWith('.md')) : [];
               } catch {
