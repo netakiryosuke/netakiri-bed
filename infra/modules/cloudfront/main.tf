@@ -4,11 +4,14 @@ resource "aws_cloudfront_function" "url_rewrite" {
   runtime = "cloudfront-js-2.0"
   publish = true
   code    = <<-EOT
+    var STATIC_EXT = /\.(ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|otf|xml|txt|pdf|html|css|json|map)$/i;
     function handler(event) {
       var uri = event.request.uri;
       if (uri.endsWith('/')) {
         event.request.uri = uri + 'index.html';
-      } else if (!uri.includes('.')) {
+      } else if (!STATIC_EXT.test(uri)) {
+        // ドット入りスラグ（例: /tags/Next.js）も対象にするため、
+        // 拡張子を持たない場合のみ index.html にリライト
         event.request.uri = uri + '/index.html';
       }
       return event.request;
