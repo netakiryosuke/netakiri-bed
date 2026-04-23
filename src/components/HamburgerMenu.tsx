@@ -38,7 +38,7 @@ export default function HamburgerMenu({ tags, isOpenHamburgerMenu, setIsOpenHamb
             <TagsDropdown tags={tags} onSelect={onClick} />
           </div>
           <Link href="/about" onClick={onClick} className="hover:opacity-70 transition-opacity">About</Link>
-          <a href="https://github.com/netakiryosuke/netakiri-bed" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://github.com/netakiryosuke/netakiri-bed" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">GitHub</a>
         </nav>
       )}
     </div>
