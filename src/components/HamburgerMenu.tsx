@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import TagsDropdown from "./TagsDropdown";
 
