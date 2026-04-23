@@ -4,14 +4,17 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 import TagsDropdown from "./TagsDropdown";
 import HamburgerMenu from "./HamburgerMenu";
+import { useState } from "react";
 
 interface Props {
   tags: string[];
 }
 
 export default function Header({ tags }: Props) {
+  const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
 
   const handleClick = () => {
+    setIsOpenHamburgerMenu(false);
     window.scrollTo(0, 0);
   };
 
@@ -38,7 +41,12 @@ export default function Header({ tags }: Props) {
         </ul>
       </nav>
 
-      <HamburgerMenu tags={tags} />
+      <HamburgerMenu
+        tags={tags}
+        isOpenHamburgerMenu={isOpenHamburgerMenu}
+        setIsOpenHamburgerMenu={setIsOpenHamburgerMenu}
+        onClick={handleClick}
+      />
     </header>
   );
 }
