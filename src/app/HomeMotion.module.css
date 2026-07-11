@@ -94,12 +94,54 @@
   z-index: 1;
 }
 
+.topicLink {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.topicLink:hover {
+  background-color: rgba(255, 255, 255, 0.035);
+  color: white;
+}
+
+.topicLink:focus-visible {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  outline: 1px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 0.2rem;
+}
+
+.topicLink span:last-child {
+  transition: color 200ms ease;
+}
+
+.topicLink:hover span:last-child,
+.topicLink:focus-visible span:last-child {
+  color: rgba(255, 255, 255, 0.78);
+}
+
 .articleLink:focus-visible {
   outline: 1px solid rgba(255, 255, 255, 0.85);
   outline-offset: 0.35rem;
 }
 
 @supports (animation-timeline: view()) {
+  .archiveHeading[data-revealed="true"],
+  .archiveCount[data-revealed="true"],
+  .archiveRow[data-revealed="true"],
+  .topicsHeading[data-revealed="true"],
+  .topicsList[data-revealed="true"],
+  .aboutHeading[data-revealed="true"],
+  .aboutContent[data-revealed="true"] {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .archiveHeader[data-revealed="true"]::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+
   .archiveHeading,
   .archiveCount {
     animation: archive-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -130,10 +172,60 @@
     animation-range: entry 28% cover 52%;
   }
 
-  .archiveList {
-    animation: archive-enter 600ms 90ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  .archiveRow {
+    animation: content-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-timeline: view();
-    animation-range: entry 33% cover 58%;
+    animation-range: entry 24% cover 48%;
+  }
+
+  .latestRow {
+    animation-range: entry 30% cover 54%;
+  }
+
+  .topicsHeading,
+  .aboutHeading {
+    animation: content-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 22% cover 46%;
+  }
+
+  .topicsList,
+  .aboutContent {
+    animation: content-enter 540ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 28% cover 52%;
+  }
+
+  @media (min-width: 1024px) {
+    .archiveHeading {
+      animation-range: entry 30% cover 55%;
+    }
+
+    .archiveCount {
+      animation-range: entry 34% cover 58%;
+    }
+
+    .archiveHeader::after {
+      animation-range: entry 39% cover 61%;
+    }
+
+    .archiveRow {
+      animation-range: 18% 52%;
+    }
+
+    .latestRow {
+      animation-range: 20% 50%;
+    }
+
+    .topicsHeading,
+    .aboutHeading {
+      animation-range: 20% 50%;
+    }
+
+    .topicsList,
+    .aboutContent {
+      animation-range: 25% 55%;
+    }
   }
 }
 
@@ -151,6 +243,11 @@
   to { transform: scaleX(1); }
 }
 
+@keyframes content-enter {
+  from { opacity: 0; transform: translate3d(0, 0.625rem, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
 @keyframes breathe {
   0%, 100% { opacity: 0.45; transform: scaleY(0.8); transform-origin: top; }
   50% { opacity: 0.95; transform: scaleY(1); transform-origin: top; }
@@ -163,12 +260,17 @@
   .archiveHeading,
   .archiveCount,
   .archiveHeader::after,
-  .archiveList {
+  .archiveRow,
+  .topicsHeading,
+  .topicsList,
+  .aboutHeading,
+  .aboutContent {
     animation: none;
   }
 
   .postSummary,
-  .postSummaryText {
+  .postSummaryText,
+  .topicLink {
     transition-duration: 0ms;
   }
 }

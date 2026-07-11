@@ -2,6 +2,7 @@ import { getAllPosts, getAllTags } from "@/lib/posts";
 import Link from "next/link";
 import HomeHero from "./HomeHero";
 import styles from "./HomeMotion.module.css";
+import HomeRevealOnce from "@/components/HomeRevealOnce";
 
 function TagLinks({ tags }: { tags: string[] }) {
   return (
@@ -27,20 +28,21 @@ export default function Home() {
 
   return (
     <main>
+      <HomeRevealOnce />
       <HomeHero />
 
       <section id="article-index" className={`relative z-10 mt-[100lvh] bg-white/3 px-6 py-14 backdrop-blur-sm sm:px-10 sm:py-16 ${styles.indexReveal}`}>
         <div className="w-full">
-          <div className={`border-b border-white/35 pb-5 sm:flex sm:items-end sm:justify-between ${styles.archiveHeader}`}>
-            <div className={styles.archiveHeading}>
+          <div data-reveal-once="line-enter" className={`border-b border-white/35 pb-5 sm:flex sm:items-end sm:justify-between ${styles.archiveHeader}`}>
+            <div data-reveal-once="archive-enter" className={styles.archiveHeading}>
               <p className="font-en mb-2 text-xs tracking-[0.18em] text-white/60">ARCHIVE</p>
               <h2 className="font-jp mb-0 text-white">記事一覧</h2>
             </div>
-            <p className={`font-en mb-0 mt-4 text-xs tracking-[0.14em] text-white/55 sm:mt-0 ${styles.archiveCount}`}>{postCount} NOTES</p>
+            <p data-reveal-once="archive-enter" className={`font-en mb-0 mt-4 text-xs tracking-[0.14em] text-white/55 sm:mt-0 ${styles.archiveCount}`}>{postCount} NOTES</p>
           </div>
           <div className={`mt-8 text-white sm:mt-10 ${styles.archiveList}`}>
           {posts[0] && (
-            <article className={`grid gap-4 border-b border-white/35 px-[clamp(0.75rem,2vw,1.25rem)] py-7 sm:grid-cols-[9rem_minmax(0,1fr)] sm:items-end sm:gap-x-8 lg:grid-cols-[9rem_minmax(0,52rem)_minmax(12rem,1fr)] ${styles.archiveEntry}`}>
+            <article data-reveal-once="content-enter" className={`grid gap-4 border-b border-white/35 px-[clamp(0.75rem,2vw,1.25rem)] py-7 sm:grid-cols-[9rem_minmax(0,1fr)] sm:items-end sm:gap-x-8 lg:grid-cols-[9rem_minmax(0,52rem)_minmax(12rem,1fr)] ${styles.archiveEntry} ${styles.archiveRow} ${styles.latestRow}`}>
               <Link className={`group grid gap-4 sm:col-span-2 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-8 lg:col-span-2 ${styles.articleLink}`} href={`/posts/${posts[0].slug}`}>
                 <div className="font-en text-xs tracking-[0.14em] text-white/60">
                   <p className="font-en mb-1 leading-none">LATEST</p>
@@ -58,8 +60,8 @@ export default function Home() {
             </article>
           )}
           <ul aria-label="その他の記事">
-            {posts.slice(1).map((post) => (
-              <li key={post.slug} className={`grid gap-3 border-b border-white/15 px-[clamp(0.75rem,2vw,1.25rem)] py-5 sm:grid-cols-[9rem_minmax(0,1fr)] sm:items-start sm:gap-x-8 lg:grid-cols-[9rem_minmax(0,52rem)_minmax(12rem,1fr)] ${styles.archiveEntry}`}>
+            {posts.slice(1).map((post, index) => (
+              <li key={post.slug} data-reveal-once="content-enter" className={`grid gap-3 border-b border-white/15 px-[clamp(0.75rem,2vw,1.25rem)] py-5 sm:grid-cols-[9rem_minmax(0,1fr)] sm:items-start sm:gap-x-8 lg:grid-cols-[9rem_minmax(0,52rem)_minmax(12rem,1fr)] ${styles.archiveEntry} ${styles.archiveRow}`} style={{ animationDelay: `${Math.min(index * 40, 160)}ms` }}>
                 <Link className={`group grid gap-3 sm:col-span-2 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-8 lg:col-span-2 ${styles.articleLink}`} href={`/posts/${post.slug}`}>
                   <time className="font-en text-xs tracking-[0.08em] text-white/60" dateTime={post.date}>{post.date}</time>
                   <div>
@@ -82,15 +84,15 @@ export default function Home() {
           </ul>
           </div>
           {topics.length > 0 && (
-            <section className="mt-20 border-t border-white/25 pt-8 sm:mt-28 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10" aria-labelledby="topics-heading">
-              <div>
+            <section className={`mt-20 border-t border-white/25 pt-8 sm:mt-28 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10 ${styles.topicsSection}`} aria-labelledby="topics-heading">
+              <div data-reveal-once="content-enter" className={styles.topicsHeading}>
                 <p className="font-en mb-2 text-xs tracking-[0.18em] text-white/60">TOPICS</p>
                 <h2 id="topics-heading" className="font-jp mb-0 text-xl font-normal text-white">タグから探す</h2>
               </div>
-              <ul className="mt-8 grid border-t border-white/20 sm:mt-0 sm:grid-cols-2 sm:gap-x-8">
+              <ul data-reveal-once="content-enter" className={`mt-8 grid border-t border-white/20 sm:mt-0 sm:grid-cols-2 sm:gap-x-8 ${styles.topicsList}`}>
                 {topics.map(({ tag, count }) => (
                   <li key={tag} className="border-b border-white/20">
-                    <Link className="font-en flex items-baseline justify-between gap-4 py-4 text-base text-white/85 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" href={`/tags/${encodeURIComponent(tag)}`}>
+                    <Link className={`font-en flex items-baseline justify-between gap-4 px-[clamp(0.75rem,2vw,1.25rem)] py-4 text-base text-white/85 ${styles.topicLink}`} href={`/tags/${encodeURIComponent(tag)}`}>
                       <span>#{tag}</span>
                       <span className="text-xs tracking-[0.12em] text-white/55">{String(count).padStart(2, "0")} NOTES</span>
                     </Link>
@@ -99,12 +101,12 @@ export default function Home() {
               </ul>
             </section>
           )}
-          <section className="mt-16 border-t border-white/25 pt-8 sm:mt-20 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10" aria-labelledby="about-home-heading">
-            <div>
+          <section className={`mt-16 border-t border-white/25 pt-8 sm:mt-20 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10 ${styles.aboutSection}`} aria-labelledby="about-home-heading">
+            <div data-reveal-once="content-enter" className={styles.aboutHeading}>
               <p className="font-en mb-2 text-xs tracking-[0.18em] text-white/60">ABOUT</p>
               <h2 id="about-home-heading" className="font-jp mb-0 text-xl font-normal text-white">書いている人</h2>
             </div>
-            <div className="mt-8 max-w-2xl sm:mt-0">
+            <div data-reveal-once="content-enter" className={`mt-8 max-w-2xl sm:mt-0 ${styles.aboutContent}`}>
               <p className="font-jp mb-4 text-sm leading-8 text-white/70">
                 2025年に新卒でIT企業に入社したエンジニアです。Java / Spring Bootをメインに、AWSも触っています。設計やアーキテクチャまわりに興味があり、「なぜそう作るのか」を考えるのが好きです。
               </p>
