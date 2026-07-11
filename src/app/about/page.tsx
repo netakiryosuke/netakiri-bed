@@ -1,9 +1,26 @@
 import type { Metadata } from "next";
 import { getAboutContent } from "@/lib/about";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: "About",
+  description: "寝たきり｜Late Nightを書いているRyosuke Osawaについて。Java、AWS、Web開発を扱うエンジニアです。",
+  alternates: {
+    canonical: "/about/",
+  },
+  openGraph: {
+    type: "profile",
+    locale: siteConfig.locale,
+    url: absoluteUrl("/about/"),
+    title: `About | ${siteConfig.name}`,
+    description: "寝たきり｜Late Nightを書いているRyosuke Osawaについて。Java、AWS、Web開発を扱うエンジニアです。",
+  },
+  twitter: {
+    card: "summary",
+    title: `About | ${siteConfig.name}`,
+    description: "寝たきり｜Late Nightを書いているRyosuke Osawaについて。Java、AWS、Web開発を扱うエンジニアです。",
+  },
 };
 
 export default async function AboutPage() {

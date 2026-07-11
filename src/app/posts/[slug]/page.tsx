@@ -4,6 +4,7 @@ import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import Toc from "@/components/Toc";
 import styles from "./content.module.css";
 import Tag from "@/components/Tag";
+import { absoluteUrl, postPath, siteConfig } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -18,9 +19,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // TODO(#issue): frontmatter不備やMarkdown変換エラーも握りつぶすため、NotFound専用エラー型の導入を検討
   const post = await getPostBySlug(slug).catch(() => null);
   if (!post) return {};
+  const url = absoluteUrl(postPath(post.slug));
+  const description = post.description ?? siteConfig.description;
+
   return {
     title: post.title,
-    description: post.description,
+    description,
+    alternates: {
+      canonical: postPath(post.slug),
+    },
+    openGraph: {
+      type: "article",
+      locale: siteConfig.locale,
+      url,
+      title: post.title,
+      description,
+      publishedTime: post.date,
+      authors: [siteConfig.author.name],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary",
+      title: post.title,
+      description,
+    },
   };
 }
 
@@ -29,9 +51,61 @@ export default async function PostPage({ params }: Props) {
   // TODO(#issue): frontmatter不備やMarkdown変換エラーも握りつぶすため、NotFound専用エラー型の導入を検討
   const post = await getPostBySlug(slug).catch(() => null);
   if (!post) notFound();
+  const url = absoluteUrl(postPath(post.slug));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description ?? siteConfig.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    url,
+    author: {
+      "@type": "Person",
+      name: siteConfig.author.name,
+      url: siteConfig.author.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteConfig.author.name,
+      url: siteConfig.author.url,
+    },
+    keywords: post.tags,
+    inLanguage: "ja",
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: absoluteUrl(),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: post.title,
+        item: url,
+      },
+    ],
+  };
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
+      />
       <article className="text-white p-4 md:p-10">
         <header className="mt-4 p-6 md:p-12 border-2 border-white rounded bg-white/3 backdrop-blur-sm">
           <h1 className="text-2xl md:text-4xl font-bold">{post.title}</h1>
