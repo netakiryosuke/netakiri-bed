@@ -5,7 +5,7 @@ import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "寝たきり｜Late Nightを書いているRyosuke Netakiriについて。Java、AWS、Web開発を扱うエンジニアです。",
+  description: "寝たきり｜Late Nightを書いているRyosuke Osawaについて。Java、AWS、Web開発を扱うエンジニアです。",
   alternates: {
     canonical: "/about/",
   },
@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: absoluteUrl("/about/"),
     title: `About | ${siteConfig.name}`,
-    description: "寝たきり｜Late Nightを書いているRyosuke Netakiriについて。Java、AWS、Web開発を扱うエンジニアです。",
+    description: "寝たきり｜Late Nightを書いているRyosuke Osawaについて。Java、AWS、Web開発を扱うエンジニアです。",
   },
   twitter: {
     card: "summary",
     title: `About | ${siteConfig.name}`,
-    description: "寝たきり｜Late Nightを書いているRyosuke Netakiriについて。Java、AWS、Web開発を扱うエンジニアです。",
+    description: "寝たきり｜Late Nightを書いているRyosuke Osawaについて。Java、AWS、Web開発を扱うエンジニアです。",
   },
 };
 

@@ -3,7 +3,7 @@ export const siteConfig = {
   description: "ベッドで読み返せるような、そんな深夜のメモ。Java、AWS、Web開発などについて、考えたことや調べたことを残す個人ブログです。",
   url: "https://netakiryosuke.com",
   author: {
-    name: "Ryosuke Netakiri",
+    name: "Ryosuke Osawa",
     url: "https://netakiryosuke.com/about/",
   },
   locale: "ja_JP",

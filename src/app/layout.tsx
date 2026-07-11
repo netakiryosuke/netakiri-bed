@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": absoluteUrl("/feed.xml"),
+    },
   },
   authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
   creator: siteConfig.author.name,
