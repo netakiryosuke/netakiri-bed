@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { getAllPosts, getAllTags } from "@/lib/posts";
 import { absoluteUrl, postPath, tagPath } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
 
