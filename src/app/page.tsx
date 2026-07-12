@@ -1,31 +1,34 @@
-import PostCard from "@/components/PostCard";
+import HomeAbout from "@/components/HomeAbout";
+import HomeArticleArchive from "@/components/HomeArticleArchive";
+import HomeHero from "@/components/HomeHero";
+import HomeScrollRevealController from "@/components/HomeScrollRevealController";
+import type { HomeTopic } from "@/components/HomeTopics";
+import HomeTopics from "@/components/HomeTopics";
 import { getAllPosts } from "@/lib/posts";
+import type { PostSummary } from "@/types/post";
+
+const collectTopics = (posts: PostSummary[]): HomeTopic[] =>
+  [...new Set(posts.flatMap((post) => post.tags))]
+    .map((tag) => ({
+      tag,
+      count: posts.filter((post) => post.tags.includes(tag)).length,
+    }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, "ja"));
 
 export default function Home() {
   const posts = getAllPosts();
+  const topics = collectTopics(posts);
 
   return (
     <main>
-      <section className="fixed top-0 left-0 w-full h-[100lvh] flex flex-col items-center justify-center z-0">
-        <h1 className="flex gap-2 text-white text-4xl font-normal tracking-normal items-baseline">
-          <span className="font-jp text-3xl">寝たきり</span>
-          <span aria-hidden="true" className="opacity-50">|</span>
-          <span className="font-en tracking-wide">
-            Late Night
-          </span>
-        </h1>
-        <p className="text-base text-gray-300 pt-2">ベッドで読み返せるような、そんな深夜のメモ</p>
-      </section>
-
-      <section className="relative z-10 p-10 mt-[100lvh] min-h-screen bg-white/3 backdrop-blur-sm">
-        <h2 className="text-white">記事一覧</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <PostCard post={post} />
-            </li>
-          ))}
-        </ul>
+      <HomeScrollRevealController />
+      <HomeHero />
+      <section id="article-index" className="relative z-10 mt-[100lvh] bg-white/3 px-6 py-14 backdrop-blur-sm sm:px-10 sm:py-16">
+        <div className="w-full">
+          <HomeArticleArchive posts={posts} />
+          <HomeTopics topics={topics} />
+          <HomeAbout />
+        </div>
       </section>
     </main>
   );
