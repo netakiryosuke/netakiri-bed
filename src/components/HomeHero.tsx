@@ -46,7 +46,7 @@ export default function HomeHero() {
           <span aria-hidden="true" className="opacity-50">|</span>
           <span className="font-en tracking-wide">Late Night</span>
         </h1>
-        <p className="pt-2 text-base text-gray-300">ベッドで読み返せるような、そんな深夜のメモ</p>
+        <p className="pt-2 text-base text-gray-300">寝言を書き残しているブログ。</p>
       </div>
       <a ref={cueRef} href="#article-index" className={styles.scrollCue}>
         <span className="font-en">Scroll to read</span>
