@@ -3,7 +3,7 @@ import styles from "@/app/HomeMotion.module.css";
 
 export default function HomeAbout() {
   return (
-    <section className={`mt-16 border-t border-white/25 pt-8 sm:mt-20 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10 ${styles.aboutSection}`} aria-labelledby="about-home-heading">
+    <section className="mt-16 border-t border-white/25 pt-8 sm:mt-20 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10" aria-labelledby="about-home-heading">
       <div data-reveal-once="content-enter" className={styles.aboutHeading}>
         <p className="font-en mb-2 text-xs tracking-[0.18em] text-white/60">ABOUT</p>
         <h2 id="about-home-heading" className="font-jp mb-0 text-xl font-normal text-white">書いている人</h2>

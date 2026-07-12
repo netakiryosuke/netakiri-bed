@@ -14,7 +14,7 @@ export default function HomeTopics({ topics }: HomeTopicsProps) {
   if (topics.length === 0) return null;
 
   return (
-    <section className={`mt-20 border-t border-white/25 pt-8 sm:mt-28 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10 ${styles.topicsSection}`} aria-labelledby="topics-heading">
+    <section className="mt-20 border-t border-white/25 pt-8 sm:mt-28 sm:grid sm:grid-cols-[minmax(12rem,0.5fr)_minmax(0,1fr)] sm:gap-x-12 sm:pt-10" aria-labelledby="topics-heading">
       <div data-reveal-once="content-enter" className={styles.topicsHeading}>
         <p className="font-en mb-2 text-xs tracking-[0.18em] text-white/60">TOPICS</p>
         <h2 id="topics-heading" className="font-jp mb-0 text-xl font-normal text-white">タグから探す</h2>

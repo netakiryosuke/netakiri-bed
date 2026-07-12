@@ -69,7 +69,7 @@ export default function HomeArticleArchive({ posts }: HomeArticleArchiveProps) {
         </div>
         <p data-reveal-once="archive-enter" className={`font-en mb-0 mt-4 text-xs tracking-[0.14em] text-white/55 sm:mt-0 ${styles.archiveCount}`}>{postCount} NOTES</p>
       </div>
-      <div className={`mt-8 text-white sm:mt-10 ${styles.archiveList}`}>
+      <div className="mt-8 text-white sm:mt-10">
         {latestPost && <LatestPostRow post={latestPost} />}
         <ul aria-label="その他の記事">
           {posts.slice(1).map((post, index) => (
