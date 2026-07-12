@@ -5,6 +5,7 @@ tags: [Java]
 description: クラスと異なるアクセサ名にする必要あったのか？がちょっと気になりました。
 ---
 
+&nbsp;
 
 Java の Record はなぜ `getName()` ではなく `name()` なのか。
 クラスと揃えれば移行が楽では？
