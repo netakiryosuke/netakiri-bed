@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import styles from "./HomeMotion.module.css";
+import styles from "@/app/HomeMotion.module.css";
 
 export default function HomeHero() {
   const contentRef = useRef<HTMLDivElement>(null);

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const COMPLETION_THRESHOLD = 0.995;
 const PAGE_BOTTOM_TOLERANCE = 2;
 
-function getScaleX(transform: string) {
+const getScaleX = (transform: string) => {
   if (transform === "none") return 1;
 
   const values = transform.match(/matrix(?:3d)?\((.+)\)/)?.[1]
@@ -14,14 +14,12 @@ function getScaleX(transform: string) {
 
   if (!values || values.some(Number.isNaN)) return 0;
 
-  if (values.length === 16) {
-    return Math.hypot(values[0], values[1], values[2]);
-  }
+  return values.length === 16
+    ? Math.hypot(values[0], values[1], values[2])
+    : Math.hypot(values[0], values[1]);
+};
 
-  return Math.hypot(values[0], values[1]);
-}
-
-export default function HomeRevealOnce() {
+export const useScrollRevealOnce = () => {
   useEffect(() => {
     if (
       !CSS.supports("animation-timeline: view()") ||
@@ -63,10 +61,10 @@ export default function HomeRevealOnce() {
       if (pending.size === 0) stopListening();
     };
 
-    function scheduleCheck() {
+    const scheduleCheck = () => {
       if (frameId !== null) return;
       frameId = requestAnimationFrame(check);
-    }
+    };
 
     window.addEventListener("scroll", scheduleCheck, { passive: true });
     scheduleCheck();
@@ -76,6 +74,4 @@ export default function HomeRevealOnce() {
       if (frameId !== null) cancelAnimationFrame(frameId);
     };
   }, []);
-
-  return null;
-}
+};
