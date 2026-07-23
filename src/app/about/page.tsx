@@ -28,10 +28,10 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <article className="text-white p-10">
+      <article className="text-white p-4">
         <div
           dangerouslySetInnerHTML={{ __html: contentHtml }}
-          className={`p-8 pt-4 border border-white rounded flex-[3] bg-white/3 backdrop-blur-sm ${styles.content}`}
+          className={`p-4 pt-4 border border-white rounded flex-[3] bg-white/3 backdrop-blur-sm ${styles.content}`}
         />
       </article>
     </main>
